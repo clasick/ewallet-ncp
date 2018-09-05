@@ -1,13 +1,8 @@
- ÛÛÛÛÛÛ   ÛÛÛÛÛ   ÛÛÛÛÛÛÛÛÛ  ÛÛÛÛÛÛÛÛÛÛÛ   
-°°ÛÛÛÛÛÛ °°ÛÛÛ   ÛÛÛ°°°°°ÛÛÛ°°ÛÛÛ°°°°°ÛÛÛ  
- °ÛÛÛ°ÛÛÛ °ÛÛÛ  ÛÛÛ     °°°  °ÛÛÛ    °ÛÛÛ  
- °ÛÛÛ°°ÛÛÛ°ÛÛÛ °ÛÛÛ          °ÛÛÛÛÛÛÛÛÛÛ   
- °ÛÛÛ °°ÛÛÛÛÛÛ °ÛÛÛ          °ÛÛÛ°°°°°°    
- °ÛÛÛ  °°ÛÛÛÛÛ °°ÛÛÛ     ÛÛÛ °ÛÛÛ          
- ÛÛÛÛÛ  °°ÛÛÛÛÛ °°ÛÛÛÛÛÛÛÛÛ  ÛÛÛÛÛ         
-°°°°°    °°°°°   °°°°°°°°°  °°°°°          
+##E-WALLET SYSTEM - NCP - 15CSE
 
-* Instructions
+_Written in Java, Jsp, JDBC._
+
+*Instructions
 
 1. Install mySQL implementation (mariadb).
    https://wiki.archlinux.org/index.php/MySQL

@@ -1,27 +1,8 @@
-<!DOCTYPE html>
+<jsp:include page="_header.jsp"></jsp:include>
 
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" type="image/png" sizes="16x16" href="static/images/favicon.png">
-    <title>Wally</title>
-
-    <link href="static/css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
-
-    <link href="static/css/lib/calendar2/semantic.ui.min.css" rel="stylesheet">
-    <link href="static/css/lib/calendar2/pignose.calendar.min.css" rel="stylesheet">
-    <link href="static/css/lib/owl.carousel.min.css" rel="stylesheet" />
-    <link href="static/css/lib/owl.theme.default.min.css" rel="stylesheet" />
-    <link href="static/css/helper.css" rel="stylesheet">
-    <link href="static/css/style.css" rel="stylesheet">
-
-
-    <script type="text/javascript">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<script type="text/javascript">
         function validateEmail(email) {
             var re =
                 /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -37,7 +18,7 @@
 
         function validateUserName(userName) {
 
-            var re = /^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/
+            var re = /^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/
 
             return re.test(String(userName));
         }
@@ -101,8 +82,8 @@
 
             }
 
-            if (!flag1 && !flag2 && !flag3 && !flag3) {
-                window.location = "account.html";
+            if (flag1 || flag2 || flag3 || flag4) {
+                return false;
             }
 
 
@@ -141,7 +122,7 @@
             <div class="col-md-4">
                 <div class="card">
                     <div class="basic-form">
-                        <form name="myForm" action="#" onsubmit="return false">
+                        <form name="myForm" action="${pageContext.request.contextPath}/sign-up" method="POST">
 
                             <div class="form-group has-errors text-danger small">
 
@@ -164,6 +145,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-10 control-label">First Name</label>
+                               <jsp:include page="_header.jsp"></jsp:include>
                                 <div class="col-sm-10">
                                     <input type="text" name="firstname" autocomplete="off" class="form-control" maxlength="10" required id="id_firstname" />
                                 </div>
@@ -228,7 +210,7 @@
                                 </div>
                             </div>
 
-                            <button onclick="validateForm()" class="btn btn-primary" style="width:100%">Sign me up!</button>
+                            <button type="submit" onclick="return validateForm()" class="btn btn-primary" style="width:100%">Sign me up!</button>
 
                         </form>
                     </div>
@@ -238,33 +220,6 @@
 
         </div>
     </div>
+     <jsp:include page="_footer.jsp"></jsp:include>
 
     </div>
-    <script src="static/js/lib/jquery/jquery.min.js"></script>
-    <script src="static/js/lib/bootstrap/js/popper.min.js"></script>
-    <script src="static/js/lib/bootstrap/js/bootstrap.min.js"></script>
-    <script src="static/js/jquery.slimscroll.js"></script>
-    <script src="static/js/sidebarmenu.js"></script>
-    <script src="static/js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
-
-
-    <script src="static/js/lib/morris-chart/raphael-min.js"></script>
-    <script src="static/js/lib/morris-chart/morris.js"></script>
-    <script src="static/js/lib/morris-chart/dashboard1-init.js"></script>
-
-
-    <script src="static/js/lib/calendar-2/moment.latest.min.js"></script>
-    <script src="static/js/lib/calendar-2/semantic.ui.min.js"></script>
-    <script src="static/js/lib/calendar-2/prism.min.js"></script>
-    <script src="static/js/lib/calendar-2/pignose.calendar.min.js"></script>
-    <script src="static/js/lib/calendar-2/pignose.init.js"></script>
-
-    <script src="static/js/lib/owl-carousel/owl.carousel.min.js"></script>
-    <script src="static/js/lib/owl-carousel/owl.carousel-init.js"></script>
-    <script src="static/js/scripts.js"></script>
-
-    <script src="static/js/custom.min.js"></script>
-
-</body>
-
-</html>

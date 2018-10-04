@@ -12,15 +12,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.Session;
+
 import co.vignesh.ncp.beans.UserAccount;
+import co.vignesh.ncp.beans.CreditCard;
 import co.vignesh.ncp.utils.*;
 import co.vignesh.ncp.conn.*;
 
-@WebServlet(urlPatterns = { "/account" })
-public class AccountServlet extends HttpServlet {
+@WebServlet(urlPatterns = { "/credit-card" })
+public class CreditServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
  
-    public AccountServlet() {
+    public CreditServlet() {
         super();
     }
  
@@ -32,27 +35,16 @@ public class AccountServlet extends HttpServlet {
         // Forward to /WEB-INF/views/loginView.jsp
         // (Users can not access dirPasswordectly into JSP pages placed in WEB-INF)
         HttpSession session = request.getSession();
-        
-//        UserAccount thisUser = MyUtils.getLoginedUser(session)
-        
-        UserAccount loginedUser = (UserAccount) session.getAttribute("loginedUser");
-        
-        request.setAttribute("firstname", loginedUser.getFirstName());
-        request.setAttribute("lastname",loginedUser.getLastName());
-        request.setAttribute("email", loginedUser.getEmail());
-        request.setAttribute("phoneno", loginedUser.getPhoneNo());
-        request.setAttribute("balance", loginedUser.getBalance());
 
-        Connection conn = MyUtils.getStoredConnection(request);
+        request.setAttribute("firstname", MyUtils.getLoginedUser(session).getFirstName());
+        request.setAttribute("lastname", MyUtils.getLoginedUser(session).getLastName());
+        request.setAttribute("email", MyUtils.getLoginedUser(session).getEmail());
+        request.setAttribute("phoneno", MyUtils.getLoginedUser(session).getPhoneNo());
+        request.setAttribute("balance", MyUtils.getLoginedUser(session).getBalance());
         
-        try {
-			request.setAttribute("credit_saved", DBUtils.checkCreditCard(conn, loginedUser.getUserName()));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
     	
         RequestDispatcher dispatcher //
-                = this.getServletContext().getRequestDispatcher("/WEB-INF/views/accountDetails.jsp");
+                = this.getServletContext().getRequestDispatcher("/WEB-INF/views/creditDetails.jsp");
  
         dispatcher.forward(request, response);
  
@@ -63,21 +55,25 @@ public class AccountServlet extends HttpServlet {
             throws ServletException, IOException {
         Connection conn = MyUtils.getStoredConnection(request);
  
-        String username = (String) request.getParameter("username");
-        String firstname = (String) request.getParameter("firstname");
-        String lastname = (String) request.getParameter("lastname");
-        String phone_no = (String) request.getParameter("phone_no");
-        String email = (String) request.getParameter("email");
-        String password = (String) request.getParameter("password1");
+        String owner = (String) request.getParameter("owner");
+        String creditCard = (String) request.getParameter("number");
+        String expiryMonth = (String) request.getParameter("expiry_month");
+        String expiryYear = (String) request.getParameter("expiry_year");
         
+        
+        HttpSession session = request.getSession();
+        
+        System.out.println((String) session.getAttribute("user"));
+        
+        UserAccount thisUser = (UserAccount) session.getAttribute("user");
        
-        UserAccount newUser = new UserAccount(username, firstname, lastname, password,email,phone_no);
+        CreditCard newCreditCard = new CreditCard(thisUser, owner, creditCard, expiryMonth, expiryYear);
  
         String errorString = null;
  
         if (errorString == null) {
             try {
-                DBUtils.insertUser(conn, newUser);
+                DBUtils.insertCreditCard(conn, MyUtils.getLoginedUser(session).getUserName(), newCreditCard);
             } catch (SQLException e) {
                 e.printStackTrace();
                 errorString = e.getMessage();
@@ -86,18 +82,18 @@ public class AccountServlet extends HttpServlet {
  
         // Store infomation to request attribute, before forward to views.
         request.setAttribute("errorString", errorString);
-        request.setAttribute("user", newUser);
- 
+        request.setAttribute("creditCard", newCreditCard);
+        
         // If error, forward to Edit page.
         if (errorString != null) {
             RequestDispatcher dispatcher = request.getServletContext()
-                    .getRequestDispatcher("${pageContext.request.contextPath}/sign-up");
+                    .getRequestDispatcher("${pageContext.request.contextPath}/credit-card");
             dispatcher.forward(request, response);
         }
         // If everything nice.
         // Redirect to the product listing page.
         else {
-            response.sendRedirect("login");
+            response.sendRedirect("browse.html");
         }
     }
     }

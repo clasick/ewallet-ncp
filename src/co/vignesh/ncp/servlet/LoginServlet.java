@@ -91,8 +91,11 @@ public class LoginServlet extends HttpServlet {
         // And redirect to userInfo page.
         else {
             HttpSession session = request.getSession();
-            MyUtils.storeLoginedUser(session, user);
+            
+//            MyUtils.storeLoginedUser(session, user);
  
+            session.setAttribute("loginedUser", user);
+            
             // always remember
 //                MyUtils.storeUserCookie(response, user);
             

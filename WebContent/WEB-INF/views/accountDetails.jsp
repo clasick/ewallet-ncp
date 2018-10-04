@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
        <jsp:include page="_header2.jsp"></jsp:include>
-<div class="container-fluid">
+        <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-    <div class="row">
-        <div class="col-lg-4">
+<div class="container-fluid">
+  <div class="row">
+        <div class="col-lg-8">
             <div class="card">
                 <!-- <div class="col-lg-2"> -->
                 <div class="recent-comment">
@@ -47,6 +48,28 @@
                                                         <th>Balance</th>
                                                         <td>${balance}</td>
                                                       </tr> 
+                                                      <tr>
+                                                        <th>Credit Card</th>
+                                                        <c:choose>
+													    <c:when test="${creditSaved}">
+													    <td>Not Linked</td>
+													    </c:when>
+													    <c:otherwise>
+													        <td>Linked</td>
+													    </c:otherwise>
+													</c:choose>
+                                                      </tr> 
+                                                      <tr>
+                                                        <th>Aadhar Linkage</th>
+                                                        <c:choose>
+													    <c:when test="${aadharLink}">
+													    <td>Not Linked</td>
+													    </c:when>
+													    <c:otherwise>
+													        <td>Linked</td>
+													    </c:otherwise>
+													</c:choose>
+                                                      </tr> 
                                         </thead>
                                        
                                        
@@ -66,10 +89,26 @@
         </div>
         
     </div>
+<a href="${pageContext.request.contextPath}/logout"><button type="button" class="btn btn-success"><i class="fa fa-sign-out"></i> Logout</button></a>
+  
+<c:choose>
+    <c:when test="${creditSaved}">
+        <a href="${pageContext.request.contextPath}/credit-card"><button type="button" class="btn btn-warning"><i class="fa fa-pencil-square-o"></i> Link Credit Card</button></a> 
+    </c:when>
+    <c:otherwise>
+        
+    </c:otherwise>
+</c:choose>
+<c:choose>
+    <c:when test="${aadharLink}">
+        <a href="${pageContext.request.contextPath}/aadhar-card"><button type="button" class="btn btn-warning"><i class="fa fa-pencil-square-o"></i> Aadhar Verification</button></a> 
+    </c:when>
+    <c:otherwise>
+        
+    </c:otherwise>
+</c:choose>
 
-    <button type="button" class="btn btn-warning" onclick="alert('Will be redirected to an edit page.')"><i class="fa fa-pencil-square-o"></i> Update Details</button> 
         </div>
-    </div>
     
          <jsp:include page="_footer2.jsp"></jsp:include>
          

@@ -46,7 +46,8 @@ public class AccountServlet extends HttpServlet {
         Connection conn = MyUtils.getStoredConnection(request);
         
         try {
-			request.setAttribute("credit_saved", DBUtils.checkCreditCard(conn, loginedUser.getUserName()));
+			request.setAttribute("creditSaved", DBUtils.checkCreditCard(conn, loginedUser.getUserName()));
+			request.setAttribute("aadharSaved", DBUtils.checkAadharCard(conn, loginedUser.getUserName()));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

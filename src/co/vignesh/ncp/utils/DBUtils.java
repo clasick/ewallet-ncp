@@ -200,6 +200,38 @@ public class DBUtils {
 		return flag;
 	}
 	
+	public static int checkAadharCard(Connection conn, String userName) throws SQLException {
+		// TODO Auto-generated method stub
+				
+		
+		String sql = "Select user_id from USER_ACCOUNT where user_name = ?";
+    	
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        pstm.setString(1, userName);
+        
+        ResultSet rs = pstm.executeQuery();
+        
+        int user_id=0;
+        
+        if (rs.next()) {
+            user_id = rs.getInt("user_id");
+        }
+        
+		String sql2 = "Select * FROM  AADHAR_CARD where user_id = ?";
+		
+		PreparedStatement pstm2 = conn.prepareStatement(sql2);
+		pstm2.setString(1, String.valueOf(user_id));    	
+		
+		rs = pstm2.executeQuery();
+		
+		int flag = 0;
+		
+		if (rs.next()) {
+            flag = 1;
+	    }
+		return flag;
+	}
+	
 	
 	
 }

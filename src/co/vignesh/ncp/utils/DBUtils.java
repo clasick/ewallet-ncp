@@ -6,7 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
- 
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import co.vignesh.ncp.beans.*;
  
 public class DBUtils {
@@ -40,6 +43,27 @@ public class DBUtils {
         }
         return null;
     }
+    
+//    public static int getUserId(Connection conn, UserAccount user) throws SQLException {
+//    	
+//    	System.out.println("######################THE REQUESTED USERNAME IS " + user.getUserName());
+//    	
+//    	String sql = "Select user_id from USER_ACCOUNT where user_name = ?";
+//    	
+//        PreparedStatement pstm = conn.prepareStatement(sql);
+//        pstm.setString(1, user.getUserName());
+//        
+//        ResultSet rs = pstm.executeQuery();
+//        
+//        if (rs.next()) {
+//            int user_id = rs.getInt("user_id");
+//            return user_id;
+//        }
+//        else {
+//        	return 0;
+//        }
+//        
+//    }
     
   public static UserAccount findUser(Connection conn, String userName) throws SQLException {
 
@@ -78,6 +102,105 @@ public class DBUtils {
 	
 	pstm.executeUpdate();
 	}
+
+	public static void insertCreditCard(Connection conn, String userName, CreditCard newCreditCard) throws SQLException {
+		// TODO Auto-generated method stub
+				
+		String sql = "Insert into CREDIT_CARD(user_id, owner, card_number, expiry_month, expiry_year) values (?, ?, ?, ?, ?)";
+		
+		PreparedStatement pstm = conn.prepareStatement(sql);
+		    	
+    	String sql2 = "Select user_id from USER_ACCOUNT where user_name = ?";
+    	
+        PreparedStatement pstm2 = conn.prepareStatement(sql2);
+        pstm2.setString(1, userName);
+        
+        ResultSet rs = pstm2.executeQuery();
+        
+        int user_id=0;
+        
+        if (rs.next()) {
+            user_id = rs.getInt("user_id");
+        }
+        
+        System.out.println("THE RETURNED USER_ID IS NOW ======= " + user_id);
+        
+		pstm.setInt(1, user_id);
+//		pstm.setInt(1, DBUtils.getUserId(conn, thisUser));
+		pstm.setString(2, newCreditCard.getOwner());
+		pstm.setString(3, newCreditCard.getCardNo());
+		pstm.setString(4, newCreditCard.getExpiryMonth());
+		pstm.setString(5, newCreditCard.getExpiryYear());
+		
+		pstm.executeUpdate();
+		
+	}
+	
+	public static void insertAadharCard(Connection conn, String userName, AadharCard newcard) throws SQLException {
+		// TODO Auto-generated method stub
+				
+		String sql = "Insert into AADHAR_CARD(user_id, name, card_no, pan) values (?, ?, ?, ?)";
+		
+		PreparedStatement pstm = conn.prepareStatement(sql);
+		    	
+    	String sql2 = "Select user_id from USER_ACCOUNT where user_name = ?";
+    	
+        PreparedStatement pstm2 = conn.prepareStatement(sql2);
+        pstm2.setString(1, userName);
+        
+        ResultSet rs = pstm2.executeQuery();
+        
+        int user_id=0;
+        
+        if (rs.next()) {
+            user_id = rs.getInt("user_id");
+        }
+        
+        System.out.println("THE RETURNED USER_ID IS NOW ======= " + user_id);
+        
+		pstm.setInt(1, user_id);
+//		pstm.setInt(1, DBUtils.getUserId(conn, thisUser));
+		pstm.setString(2, newcard.getName());
+		pstm.setString(3, newcard.getCardNo());
+		pstm.setString(4, newcard.getPanNo());
+		
+		pstm.executeUpdate();
+		
+	}
+	
+	public static int checkCreditCard(Connection conn, String userName) throws SQLException {
+		// TODO Auto-generated method stub
+				
+		
+		String sql = "Select user_id from USER_ACCOUNT where user_name = ?";
+    	
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        pstm.setString(1, userName);
+        
+        ResultSet rs = pstm.executeQuery();
+        
+        int user_id=0;
+        
+        if (rs.next()) {
+            user_id = rs.getInt("user_id");
+        }
+        
+		String sql2 = "Select * FROM  CREDIT_CARD where user_id = ?";
+		
+		PreparedStatement pstm2 = conn.prepareStatement(sql2);
+		pstm2.setString(1, String.valueOf(user_id));    	
+		
+		rs = pstm2.executeQuery();
+		
+		int flag = 0;
+		
+		if (rs.next()) {
+            flag = 1;
+	    }
+		return flag;
+	}
+	
+	
 	
 }
  
@@ -111,7 +234,7 @@ public class DBUtils {
 //        ResultSet rs = pstm.executeQuery();
 //        List<Product> list = new ArrayList<Product>();
 //        while (rs.next()) {
-//            String code = rs.getString("Code");
+//            String code = rs.getnewCreditCardString("Code");
 //            String name = rs.getString("Name");
 //            float price = rs.getFloat("Price");
 //            Product product = new Product();
@@ -132,7 +255,7 @@ public class DBUtils {
 //        ResultSet rs = pstm.executeQuery();
 // 
 //        while (rs.next()) {
-//            String name = rs.getString("Name");
+//            String name = rs.getStnewCreditCardring("Name");
 //            float price = rs.getFloat("Price");
 //            Product product = new Product(code, name, price);
 //            return product;
@@ -154,7 +277,7 @@ public class DBUtils {
 //    public static void insertProduct(Connection conn, Product product) throws SQLException {
 //        String sql = "Insert into Product(Code, Name,Price) values (?,?,?)";
 // 
-//        PreparedStatement pstm = conn.prepareStatement(sql);
+//        PreparedStatement pstm = cnewCreditCardonn.prepareStatement(sql);
 // 
 //        pstm.setString(1, product.getCode());
 //        pstm.setString(2, product.getName());

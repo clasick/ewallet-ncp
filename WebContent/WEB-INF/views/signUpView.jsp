@@ -2,94 +2,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<script type="text/javascript">
-        function validateEmail(email) {
-            var re =
-                /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            return re.test(String(email).toLowerCase());
-        }
-
-        function validatePhoneNo(phoneNo) {
-
-            var re = /^\d{10}$/;
-
-            return re.test(String(phoneNo));
-        }
-
-        function validateUserName(userName) {
-
-            var re = /^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/
-
-            return re.test(String(userName));
-        }
-
-
-        function validateForm() {
-
-            var flag1 = 0,
-                flag2 = 0,
-                flag3 = 0,
-                flag4 = 0;
-
-            var email = document.forms["myForm"]["email"].value;
-            var phoneno = document.forms["myForm"]['phone_no'].value;
-            var userName = document.forms["myForm"]['username'].value;
-            var password1 = document.forms["myForm"]['password1'].value;
-            var password2 = document.forms["myForm"]['password2'].value;
-
-
-            if (!validateEmail(email)) {
-                document.getElementById("error-email").innerHTML =
-                    '<ul class="errorlist"><li>Please provide a valid email address.</li></ul>';
-                flag1 = 1;
-            } else {
-                document.getElementById("error-email").innerHTML =
-                    '';
-                flag1 = 0;
-
-            }
-
-            if (!validatePhoneNo(phoneno)) {
-                document.getElementById("error-phoneno").innerHTML =
-                    '<ul class="errorlist"><li>Please provide a valid phone number.</li></ul>';
-                flag2 = 1;
-            } else {
-                document.getElementById("error-phoneno").innerHTML =
-                    '';
-                flag2 = 0;
-
-            }
-
-            if (!validateUserName(userName)) {
-                document.getElementById("error-username").innerHTML =
-                    '<ul class="errorlist"><li>Please provide a valid username.</li></ul>';
-                flag3 = 1;
-            } else {
-                document.getElementById("error-username").innerHTML =
-                    '';
-                flag3 = 0;
-
-            }
-
-            if (password1 != password2) {
-                document.getElementById("error-password1").innerHTML =
-                    '<ul class="errorlist"><li>Your passwords do not match.</li></ul>';
-                flag4 = 1;
-            } else {
-                document.getElementById("error-password1").innerHTML =
-                    '';
-                flag4 = 0;
-
-            }
-
-            if (flag1 || flag2 || flag3 || flag4) {
-                return false;
-            }
-
-
-        }
-    </script>
-
+    
 
 </head>
 
@@ -220,6 +133,97 @@
 
         </div>
     </div>
+    
+    
+	<script type="text/javascript">
+        function validateEmail(email) {
+            var re =
+                /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(String(email).toLowerCase());
+        }
+
+        function validatePhoneNo(phoneNo) {
+
+            var re = /^\d{10}$/;
+
+            return re.test(String(phoneNo));
+        }
+
+        function validateUserName(userName) {
+
+        	var re = /^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/
+
+            return re.test(String(userName));
+        }
+
+
+        function validateForm() {
+
+            var flag1 = 0,
+                flag2 = 0,
+                flag3 = 0,
+                flag4 = 0;
+
+            var email = document.forms["myForm"]["email"].value;
+            var phoneno = document.forms["myForm"]['phone_no'].value;
+            var userName = document.forms["myForm"]['username'].value;
+            var password1 = document.forms["myForm"]['password1'].value;
+            var password2 = document.forms["myForm"]['password2'].value;
+
+
+            if (!validateEmail(email)) {
+                document.getElementById("error-email").innerHTML =
+                    '<ul class="errorlist"><li>Please provide a valid email address.</li></ul>';
+                flag1 = 1;
+            } else {
+                document.getElementById("error-email").innerHTML =
+                    '';
+                flag1 = 0;
+
+            }
+
+            if (!validatePhoneNo(phoneno)) {
+                document.getElementById("error-phoneno").innerHTML =
+                    '<ul class="errorlist"><li>Please provide a valid phone number.</li></ul>';
+                flag2 = 1;
+            } else {
+                document.getElementById("error-phoneno").innerHTML =
+                    '';
+                flag2 = 0;
+
+            }
+
+            if (!validateUserName(userName)) {
+                document.getElementById("error-username").innerHTML =
+                    '<ul class="errorlist"><li>Please provide a valid username.</li></ul>';
+                flag3 = 1;
+            } else {
+                document.getElementById("error-username").innerHTML =
+                    '';
+                flag3 = 0;
+
+            }
+
+            if (password1 != password2) {
+                document.getElementById("error-password1").innerHTML =
+                    '<ul class="errorlist"><li>Your passwords do not match.</li></ul>';
+                flag4 = 1;
+            } else {
+                document.getElementById("error-password1").innerHTML =
+                    '';
+                flag4 = 0;
+
+            }
+
+            if (flag1 || flag2 || flag3 || flag4) {
+                return false;
+            }
+
+
+        }
+    </script>
+    
+    
      <jsp:include page="_footer.jsp"></jsp:include>
 
     </div>

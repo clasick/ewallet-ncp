@@ -92,7 +92,7 @@ public class AadharServlet extends HttpServlet {
         // If everything nice.
         // Redirect to the product listing page.
         else {
-            response.sendRedirect("browse.html");
+            response.sendRedirect("/NCP/account");
         }
     }
     }

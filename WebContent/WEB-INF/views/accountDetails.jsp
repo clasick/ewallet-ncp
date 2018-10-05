@@ -51,22 +51,22 @@
                                                       <tr>
                                                         <th>Credit Card</th>
                                                         <c:choose>
-													    <c:when test="${creditSaved}">
-													    <td>Not Linked</td>
+													    <c:when test="${creditSaved == 1}">
+													    <td>Linked</td>
 													    </c:when>
 													    <c:otherwise>
-													        <td>Linked</td>
+													        <td>Not Linked</td>
 													    </c:otherwise>
 													</c:choose>
                                                       </tr> 
                                                       <tr>
                                                         <th>Aadhar Linkage</th>
                                                         <c:choose>
-													    <c:when test="${aadharLink}">
-													    <td>Not Linked</td>
+													    <c:when test="${aadharSaved == 1}">
+													    <td>Linked</td>
 													    </c:when>
 													    <c:otherwise>
-													        <td>Linked</td>
+													        <td>Not Linked</td>
 													    </c:otherwise>
 													</c:choose>
                                                       </tr> 
@@ -92,7 +92,7 @@
 <a href="${pageContext.request.contextPath}/logout"><button type="button" class="btn btn-success"><i class="fa fa-sign-out"></i> Logout</button></a>
   
 <c:choose>
-    <c:when test="${creditSaved}">
+    <c:when test="${creditSaved == 0}">
         <a href="${pageContext.request.contextPath}/credit-card"><button type="button" class="btn btn-warning"><i class="fa fa-pencil-square-o"></i> Link Credit Card</button></a> 
     </c:when>
     <c:otherwise>
@@ -100,8 +100,8 @@
     </c:otherwise>
 </c:choose>
 <c:choose>
-    <c:when test="${aadharLink}">
-        <a href="${pageContext.request.contextPath}/aadhar-card"><button type="button" class="btn btn-warning"><i class="fa fa-pencil-square-o"></i> Aadhar Verification</button></a> 
+    <c:when test="${aadharSaved == 0}">
+        <a href="${pageContext.request.contextPath}/aadhar-card"><button type="button" class="btn btn-info"><i class="fa fa-pencil-square-o"></i> Aadhar Verification</button></a> 
     </c:when>
     <c:otherwise>
         

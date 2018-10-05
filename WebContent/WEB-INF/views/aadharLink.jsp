@@ -29,7 +29,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-10 control-label">Aadhar Number</label>
                                     <div class="col-sm-10">
-                                        <input type="text" name="number" autocomplete="off" class="form-control" maxlength="15" id="cardNumber" required />
+                                        <input type="text" name="number" autocomplete="off" class="form-control" maxlength="14" id="cardNumber" required />
                                     </div>
                                 </div>
                                 <div id="error-card" class="form-group has-errors text-danger small">
@@ -38,7 +38,7 @@
                         <div class="form-group">
                             <label class="col-sm-10 control-label">PAN</label>
                             <div class="col-sm-10">
-                                <input type="password" name="input_pan" autocomplete="off" class="form-control" maxlength="10" id="pan" required />
+                                <input type="text" name="input_pan" autocomplete="off" class="form-control" maxlength="10" id="pan" required />
                             </div>
                         </div>
                         <div id="error-pan" class="form-group has-errors text-danger small">
@@ -80,7 +80,7 @@
             var cno1 = /^\d{4}\s\d{4}\s\d{4}$/
             var pan = /^[A-Za-z]{5}\d{4}[A-Za-z]{1}$/
             var name = document.getElementById("owner");
-            var nameval = /^[a-zA-Z]+$/;
+            var nameval = /^[a-zA-Z]+.[a-zA-Z]+$/;
             
         
             if (!name.value.match(nameval)) {

@@ -63,7 +63,14 @@
         </div>
         <!-- End header header -->
         <!-- Left Sidebar  -->
-
+ <div class="left-sidebar">
+            <div class="sidenav">
+                <a href="/NCP/account">Account</a>
+                <a href="browse.html">Browse</a>
+              </div>
+              
+        </div>
+        
         <!-- End Left Sidebar  -->
         <!-- Page wrapper  -->
         <div class="page-wrapper">
